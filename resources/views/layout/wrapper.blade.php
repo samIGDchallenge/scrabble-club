@@ -3,25 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Scrabble Club</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     @vite('resources/css/app.css')
-    <!-- Styles -->
-    <style>
-        body {
-            font-family: 'Nunito', sans-serif;
-        }
-    </style>
 </head>
 <body class="antialiased overflow-x-hidden">
 <div class="flex">
-    <div class="md:flex-col">
+    <div class="md:flex-col w-2/12">
         @include('layout.nav')
     </div>
-    <div class="md:flex-col">
+    <div class="md:flex-col w-10/12">
         @yield('content')
     </div>
 </div>

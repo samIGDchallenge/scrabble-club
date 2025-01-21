@@ -10,6 +10,7 @@ class Member extends Model
 {
     use HasApiTokens, Notifiable;
 
+    public const ID = 'id';
     public const NAME = 'name';
     public const EMAIL = 'email';
     public const PHONE = 'phone';
@@ -25,6 +26,14 @@ class Member extends Model
         self::AVG_SCORE,
         self::RECENT_FORM
     ];
+
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->{self::ID};
+    }
 
     /**
      * @return string
