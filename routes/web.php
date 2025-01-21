@@ -14,5 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+// Members CRUD
+Route::get('/members', 'MemberController@getMembers')->name('members');
+//Route::get('/members/{memberId}', 'MemberController@create')->name('members.create');
+Route::get('/members/{memberId}', 'MemberController@view')->name('members.view');
+Route::post('/members/{memberId}', 'MemberController@update')->name('members.update');
+//Route::post('/members/{memberId}', 'MemberController@update')->name('members.update');
