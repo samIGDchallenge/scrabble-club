@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -17,6 +19,7 @@ class Member extends Model
     public const JOIN_DATE = 'joinDate';
     public const AVG_SCORE = 'avgScore';
     public const RECENT_FORM = 'recentForm';
+    public const HIGH_SCORE = 'highScore';
 
     protected $fillable = [
         self::NAME,
@@ -24,7 +27,8 @@ class Member extends Model
         self::PHONE,
         self::JOIN_DATE,
         self::AVG_SCORE,
-        self::RECENT_FORM
+        self::RECENT_FORM,
+        self::HIGH_SCORE
     ];
 
     /**
@@ -140,6 +144,43 @@ class Member extends Model
     public function setRecentForm(string $recentForm): Member
     {
         $this->{self::RECENT_FORM} = $recentForm;
+        return $this;
+    }
+
+    /**
+     * @return HasMany<Score>
+     */
+    public function getAllScores(): HasMany
+    {
+        return $this->hasMany(Score::class);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasHighScore(): bool
+    {
+        return !is_null($this->{self::HIGH_SCORE});
+    }
+
+    /**
+     * @return HasOne<Score>|null
+     */
+    public function getHighScore(): ?HasOne
+    {
+        if ($this->hasHighScore()) {
+            return $this->hasOne(Score::class);
+        }
+        return null;
+    }
+
+    /**
+     * @param Score $score
+     * @return Member
+     */
+    public function setHighScore(Score $score): Member
+    {
+        $this->getHighScore()->save($score);
         return $this;
     }
 }

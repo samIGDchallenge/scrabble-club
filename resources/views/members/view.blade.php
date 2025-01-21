@@ -53,11 +53,17 @@
                 <tbody>
                 <tr>
                     <td class="font-bold p-2">Average Score</td>
-                    <td class="p-2">XXX</td>
+                    <td class="p-2">{{ $member->getAvgScore() }}</td>
                 </tr>
                 <tr>
                     <td class="font-bold p-2">Highest Score</td>
-                    <td class="p-2">XXX</td>
+                    @if ($member->hasHighScore())
+                        <td class="p-2">
+{{--                            high score here--}}
+                        </td>
+                    @else
+                        <td class="p-2">0</td>
+                    @endif
                 </tr>
                 </tbody>
             </table>
