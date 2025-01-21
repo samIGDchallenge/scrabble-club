@@ -32,7 +32,7 @@
                     'name' => 'joinDate'
                 ])
             </div>
-            <button type="submit" class="bg-green-500 c-white">Submit</button>
+            <button type="submit" class="bg-green-500 text-white rounded pl-2 pr-2 pt-1 pb-1">Submit</button>
         </form>
     </div>
 @endsection

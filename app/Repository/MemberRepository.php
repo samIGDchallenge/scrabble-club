@@ -33,4 +33,12 @@ class MemberRepository
             Member::JOIN_DATE => $joinDate
         ]);
     }
+
+    public function delete(string $memberId): bool
+    {
+        echo 'hello2';
+        $member = $this->getMember($memberId);
+
+        return $member->delete();
+    }
 }

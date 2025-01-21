@@ -1,10 +1,10 @@
-<div class="p-2">
-    <label class="w-5/12" for="{{ $id ?? strtolower($name) }}">
+<div class="pb-2 flex max-w-screen-sm">
+    <label class="w-3/12" for="{{ $id ?? strtolower($name) }}">
         {{ $label }}
     </label>
     <input
         type="text"
-        class="w-7/12 border-grey-500"
+        class="w-9/12 border border-gray-500 rounded"
         name="{{ $name }}"
         value="{{ $value ?? '' }}"
         id="{{ $id ?? strtolower($name) }}"

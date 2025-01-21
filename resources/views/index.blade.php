@@ -1,7 +1,7 @@
 @extends('layout.wrapper')
 
 @section('content')
-    <div class="relative md:ml-64 bg-gray-100">
+    <div>
         @include('layout.dashboard')
     </div>
 @endsection

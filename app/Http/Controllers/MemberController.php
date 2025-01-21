@@ -79,4 +79,11 @@ class MemberController
 
         return new RedirectResponse(route('members'));
     }
+
+    public function delete(string $memberId): RedirectResponse
+    {
+        $this->repository->delete($memberId);
+
+        return new RedirectResponse(route('members'));
+    }
 }

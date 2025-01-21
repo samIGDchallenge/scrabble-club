@@ -24,4 +24,4 @@ Route::post('/members', 'MemberController@save')->name('members.save');
 Route::get('/members/{memberId}', 'MemberController@view')->name('members.view');
 Route::get('/members/{memberId}/edit', 'MemberController@edit')->name('members.edit');
 Route::post('/members/{memberId}', 'MemberController@update')->name('members.update');
-//Route::delete('/members/{memberId}', 'MemberController@delete')->name('members.delete');
+Route::delete('/members/{memberId}', 'MemberController@delete')->name('members.delete');
