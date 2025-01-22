@@ -24,7 +24,8 @@ class ScoreTableSeeder extends Seeder
         $this->addScore(442, 3,2);
         $this->addScore(232, 3,3);
         $this->addScore(345, 3,4);
-        $this->addScore(234, 3,5);
+        $this->addScore(355, 4,2);
+        $this->addScore(112, 4,4);
     }
 
     private function addScore(

@@ -78,7 +78,7 @@ class MemberController
         return new RedirectResponse(route('members'));
     }
 
-    public function viewLeaderboard(): View
+    public function getLeaderboard(): View
     {
         $topTen = $this->repository->getTopTen();
         return $this->factory->make('leaderboard.list', [

@@ -18,9 +18,9 @@ class Game extends Model
     ];
 
     /**
-     * @return string
+     * @return int
      */
-    public function getId(): string
+    public function getId(): int
     {
         return $this->{self::ID};
     }
@@ -39,10 +39,36 @@ class Game extends Model
     }
 
     /**
+     * @return Member
+     */
+    public function getWinner(): Member
+    {
+        return $this->winner()->get()->first();
+    }
+
+    /**
+     * @param string $winnerId
+     * @return Game
+     */
+    public function setWinner(string $winnerId): Game
+    {
+        $this->{self::WINNER_ID} = $winnerId;
+        return $this;
+    }
+
+    /**
      * @return HasMany<Score>
      */
     public function scores(): HasMany
     {
         return $this->hasMany(Score::class, Score::GAME_ID, self::ID);
+    }
+
+    /**
+     * @return Collection<Score>
+     */
+    public function getScores(): Collection
+    {
+        return $this->scores()->orderBy(Score::SCORE,'desc')->get();
     }
 }

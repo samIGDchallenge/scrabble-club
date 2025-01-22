@@ -6,7 +6,7 @@
 
 @section('content')
     <div>
-        <a href="{{ route('members') }}" class="bg-blue-500 text-white rounded pl-2 pr-2 pt-1 pb-1">< BACK</a>
+        <a href="{{ route('members') }}" class="font-bold pl-2 pr-2 pt-1 pb-1">◀ All members</a>
         <div class="rounded-2xl bg-white p-4 mt-4">
             <div class="flex pt-3 pb-3">
                 <h5 class="font-bold text-lg pr-3">Member Details</h5>

@@ -27,6 +27,7 @@ Route::post('/members/{memberId}', 'MemberController@update')->name('members.upd
 Route::delete('/members/{memberId}', 'MemberController@delete')->name('members.delete');
 
 Route::get('/games', 'GameController@getGames')->name('games');
-Route::get('/leaderboard', 'MemberController@getLeaderboard')->name('leaderboard');
+Route::get('/games/{gameId}', 'GameController@getResult')->name('games.result');
+Route::post('/games/play', 'GameController@playGame')->name('games.play');
 
-Route::post('/run-game', 'GameController@runGames')->name('run-game');
+Route::get('/leaderboard', 'MemberController@getLeaderboard')->name('leaderboard');

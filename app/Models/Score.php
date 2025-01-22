@@ -13,6 +13,7 @@ class Score extends Model
     public const MEMBER_ID = 'memberId';
 
     protected $fillable = [
+        self::SCORE,
         self::GAME_ID,
         self::MEMBER_ID
     ];
@@ -36,7 +37,7 @@ class Score extends Model
     /**
      * @return BelongsTo<Game>
      */
-    public function getGame(): BelongsTo
+    public function game(): BelongsTo
     {
         return $this->belongsTo(Game::class, 'gameId');
     }
@@ -44,8 +45,16 @@ class Score extends Model
     /**
      * @return BelongsTo<Member>
      */
-    public function getMember(): BelongsTo
+    public function member(): BelongsTo
     {
         return $this->belongsTo(Member::class, 'memberId');
+    }
+
+    /**
+     * @return Member|null
+     */
+    public function getMember(): ?Member
+    {
+        return $this->member()->get()->first() ?? null;
     }
 }

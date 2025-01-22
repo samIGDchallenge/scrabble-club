@@ -19,6 +19,24 @@ class MemberRepository
             ->cursor();
     }
 
+    public function getNumberOfMembers(): int
+    {
+        return $this->model->newModelQuery()->count();
+    }
+
+    public function getRandomMembers(int $number): Collection
+    {
+        $randomIds = $this->model->newModelQuery()
+            ->select('id')
+            ->inRandomOrder()
+            ->limit($number)
+            ->pluck('id');
+
+        return $this->model->newModelQuery()
+            ->whereIn('id', $randomIds)
+            ->get();
+    }
+
     public function getTopTen(): Collection
     {
         return $this->model->newModelQuery()

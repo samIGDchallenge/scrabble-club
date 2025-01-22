@@ -13,10 +13,10 @@ class GameTableSeeder extends Seeder
 
     public function run(): void
     {
-        $this->addGame(1);
-        $this->addGame(2);
-        $this->addGame(2);
+        $this->addGame(4);
         $this->addGame(3);
+        $this->addGame(2);
+        $this->addGame(2);
     }
 
     private function addGame(

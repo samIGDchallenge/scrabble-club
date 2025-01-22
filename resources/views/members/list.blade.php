@@ -6,13 +6,12 @@
 
 @section('content')
     <div>
-        <a href="/" class="bg-blue-500 text-white rounded pl-2 pr-2 pt-1 pb-1">< BACK</a>
         <div class="rounded-2xl bg-white p-4 mt-4">
             <div class="flex pt-3 pb-3">
                 <h3 class="font-bold text-lg pr-3">Club Members</h3>
                 <div>
                     <a href="{{ route('members.create') }}"
-                       class="bg-green-500 text-white rounded pl-2 pr-2 pt-1 pb-1"
+                       class="bg-green-500 text-white rounded pl-2 pr-2 pt-1 pb-1 block"
                     >+ Create</a>
                 </div>
             </div>

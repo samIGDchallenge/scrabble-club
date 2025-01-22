@@ -184,13 +184,4 @@ class Member extends Model
 
         return $this;
     }
-
-    public function handleNewScore(Score $score): void
-    {
-        if ($score->getScore() > $this->getHighScore()) {
-            $this->setHighScore($score);
-        }
-        $newAvgScore = $this->allScores()->avg('score');
-        $this->setAvgScore($newAvgScore);
-    }
 }

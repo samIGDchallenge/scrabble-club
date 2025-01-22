@@ -6,7 +6,7 @@
 
 @section('content')
     <div>
-        <a href="{{ route('members.view', ['memberId' => $member->getId()]) }}" class="bg-blue-500 text-white rounded pl-2 pr-2 pt-1 pb-1">< BACK</a>
+        <a href="{{ route('members.view', ['memberId' => $member->getId()]) }}" class="font-bold pl-2 pr-2 pt-1 pb-1">◀ Back</a>
         <div class="rounded-2xl bg-white p-4 mt-4">
             <div class="flex pt-3 pb-3">
                 <h5 class="font-bold text-lg">Editing member {{ $member->getId() }} - {{ $member->getName() }}</h5>

@@ -15,21 +15,12 @@ class GameRepository
     public function getAll(): LazyCollection
     {
         return $this->model->newModelQuery()
+            ->orderBy(Game::ID, 'desc')
             ->cursor();
     }
-//
-//    public function getGame(string $gameId): Member
-//    {
-//        return $this->model->newModelQuery()->find($gameId);
-//    }
-//
-//    public function create(string $name, string $email, string $phone, string $joinDate): Member
-//    {
-//        return $this->model->newModelQuery()->create([
-//            Member::NAME => $name,
-//            Member::EMAIL => $email,
-//            Member::PHONE => $phone,
-//            Member::JOIN_DATE => $joinDate
-//        ]);
-//    }
+
+    public function getGame(string $gameId): Game
+    {
+        return $this->model->newModelQuery()->find($gameId);
+    }
 }
