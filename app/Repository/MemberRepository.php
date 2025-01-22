@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
-use App\Http\Requests\SaveMemberRequest;
 use App\Models\Member;
+use Illuminate\Support\Collection;
 use Illuminate\Support\LazyCollection;
 
 class MemberRepository
@@ -17,6 +17,14 @@ class MemberRepository
     {
         return $this->model->newModelQuery()
             ->cursor();
+    }
+
+    public function getTopTen(): Collection
+    {
+        return $this->model->newModelQuery()
+            ->orderBy(Member::AVG_SCORE, 'desc')
+            ->limit(10)
+            ->get();
     }
 
     public function getMember(string $memberId): Member
@@ -36,7 +44,6 @@ class MemberRepository
 
     public function delete(string $memberId): bool
     {
-        echo 'hello2';
         $member = $this->getMember($memberId);
 
         return $member->delete();

@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('joinDate');
             $table->integer('avgScore')->default(0);
             $table->string('recentForm',5)->default('-----');
+            $table->integer('highScore')->default(0);
+            $table->integer('highScoreId');
             $table->timestamps();
         });
     }

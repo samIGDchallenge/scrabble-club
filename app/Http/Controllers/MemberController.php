@@ -18,9 +18,6 @@ class MemberController
     public function getMembers(): View
     {
         return view('members.list', [
-            'page' => [
-                'name' => 'Members'
-            ],
             'members' => $this->repository->getAll()
         ]);
     }
@@ -48,9 +45,6 @@ class MemberController
     {
         $member = $this->repository->getMember($memberId);
         return $this->factory->make('members.view', [
-            'page' => [
-                'name' => sprintf('Member - %s', $member->getName())
-            ],
             'member' => $member
         ]);
     }
@@ -59,9 +53,6 @@ class MemberController
     {
         $member = $this->repository->getMember($memberId);
         return $this->factory->make('members.edit', [
-            'page' => [
-                'name' => sprintf('Member - %s', $member->getName())
-            ],
             'member' => $member
         ]);
     }
@@ -85,5 +76,13 @@ class MemberController
         $this->repository->delete($memberId);
 
         return new RedirectResponse(route('members'));
+    }
+
+    public function viewLeaderboard(): View
+    {
+        $topTen = $this->repository->getTopTen();
+        return $this->factory->make('leaderboard.list', [
+            'topTen' => $topTen
+        ]);
     }
 }

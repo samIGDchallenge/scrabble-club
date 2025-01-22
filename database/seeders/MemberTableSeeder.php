@@ -3,9 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Member;
-use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Date;
 
 class MemberTableSeeder extends Seeder
 {
@@ -36,7 +34,9 @@ class MemberTableSeeder extends Seeder
                 Member::PHONE => $phone,
                 Member::JOIN_DATE => $joinDate,
                 Member::AVG_SCORE => 0,
-                Member::RECENT_FORM => '-----'
+                Member::RECENT_FORM => '-----',
+                Member::HIGH_SCORE => 0,
+                Member::HIGH_SCORE_ID => null
             ]);
         }
         return $user;

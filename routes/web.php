@@ -25,3 +25,8 @@ Route::get('/members/{memberId}', 'MemberController@view')->name('members.view')
 Route::get('/members/{memberId}/edit', 'MemberController@edit')->name('members.edit');
 Route::post('/members/{memberId}', 'MemberController@update')->name('members.update');
 Route::delete('/members/{memberId}', 'MemberController@delete')->name('members.delete');
+
+Route::get('/games', 'GameController@getGames')->name('games');
+Route::get('/leaderboard', 'MemberController@getLeaderboard')->name('leaderboard');
+
+Route::post('/run-game', 'GameController@runGames')->name('run-game');

@@ -57,13 +57,7 @@
                 </tr>
                 <tr>
                     <td class="font-bold p-2">Highest Score</td>
-                    @if ($member->hasHighScore())
-                        <td class="p-2">
-{{--                            high score here--}}
-                        </td>
-                    @else
-                        <td class="p-2">0</td>
-                    @endif
+                    <td class="p-2">{{ $member->getHighScore() }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -85,16 +79,24 @@
                 </tr>
                 </thead>
                 <tbody>
-{{--                @foreach($member->getRecentGames() as $game)--}}
-{{--                <tr>--}}
-{{--                    <td class="text-left p-2">--}}
-{{--                    </td>--}}
-{{--                    <td lass="text-right p-2">--}}
-{{--                    </td>--}}
-{{--                    <td class="text-left p-2">--}}
-{{--                    </td>--}}
-{{--                </tr>--}}
-{{--                @endforeach--}}
+{{--                @if (count($member->getRecentGames()) > 0)--}}
+{{--                    @foreach($member->getRecentGames() as $game)--}}
+{{--                    <tr>--}}
+{{--                        <td class="text-left p-2">--}}
+{{--                        </td>--}}
+{{--                        <td lass="text-right p-2">--}}
+{{--                        </td>--}}
+{{--                        <td class="text-left p-2">--}}
+{{--                        </td>--}}
+{{--                    </tr>--}}
+{{--                    @endforeach--}}
+{{--                @else--}}
+{{--                    <tr>--}}
+{{--                        <td colspan="3">--}}
+{{--                            No games played--}}
+{{--                        </td>--}}
+{{--                    </tr>--}}
+{{--                @endif--}}
                 </tbody>
             </table>
         </div>

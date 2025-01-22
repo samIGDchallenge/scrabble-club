@@ -20,6 +20,7 @@ class Member extends Model
     public const AVG_SCORE = 'avgScore';
     public const RECENT_FORM = 'recentForm';
     public const HIGH_SCORE = 'highScore';
+    public const HIGH_SCORE_ID = 'highScoreId';
 
     protected $fillable = [
         self::NAME,
@@ -28,7 +29,8 @@ class Member extends Model
         self::JOIN_DATE,
         self::AVG_SCORE,
         self::RECENT_FORM,
-        self::HIGH_SCORE
+        self::HIGH_SCORE,
+        self::HIGH_SCORE_ID
     ];
 
     /**
@@ -150,28 +152,25 @@ class Member extends Model
     /**
      * @return HasMany<Score>
      */
-    public function getAllScores(): HasMany
+    public function allScores(): HasMany
     {
-        return $this->hasMany(Score::class);
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasHighScore(): bool
-    {
-        return !is_null($this->{self::HIGH_SCORE});
+        return $this->hasMany(Score::class, Score::MEMBER_ID, self::ID);
     }
 
     /**
      * @return HasOne<Score>|null
      */
-    public function getHighScore(): ?HasOne
+    public function highScore(): ?HasOne
     {
-        if ($this->hasHighScore()) {
-            return $this->hasOne(Score::class);
-        }
-        return null;
+        return $this->hasOne(Score::class, Score::ID, self::HIGH_SCORE_ID);
+    }
+
+    /**
+     * @return int
+     */
+    public function getHighScore(): int
+    {
+        return $this->{self::HIGH_SCORE};
     }
 
     /**
@@ -180,7 +179,18 @@ class Member extends Model
      */
     public function setHighScore(Score $score): Member
     {
-        $this->getHighScore()->save($score);
+        $this->{self::HIGH_SCORE} = $score->getScore();
+        $this->{self::HIGH_SCORE_ID} = $score->getId();
+
         return $this;
+    }
+
+    public function handleNewScore(Score $score): void
+    {
+        if ($score->getScore() > $this->getHighScore()) {
+            $this->setHighScore($score);
+        }
+        $newAvgScore = $this->allScores()->avg('score');
+        $this->setAvgScore($newAvgScore);
     }
 }

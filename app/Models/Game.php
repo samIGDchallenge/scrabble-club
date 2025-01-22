@@ -2,20 +2,19 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Ramsey\Collection\Collection;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Collection;
 
 class Game extends Model
 {
-    use HasApiTokens, Notifiable;
-
     public const ID = 'id';
-    public const TIME = 'time';
+    public const WINNER_ID = 'winnerId';
 
     protected $fillable = [
+        self::WINNER_ID
     ];
 
     /**
@@ -26,21 +25,24 @@ class Game extends Model
         return $this->{self::ID};
     }
 
-    /**
-     * @return Collection
-     */
-    public function getParticipants(): Collection
+    public function getTime(): Carbon
     {
-        return $this->{self::NAME};
+        return $this->{self::CREATED_AT};
     }
 
     /**
-     * @param string $name
-     * @return Member
+     * @return HasOne<Member>
      */
-    public function setName(string $name): Member
+    public function winner(): HasOne
     {
-        $this->{self::NAME} = $name;
-        return $this;
+        return $this->hasOne(Member::class, Member::ID, self::WINNER_ID);
+    }
+
+    /**
+     * @return HasMany<Score>
+     */
+    public function scores(): HasMany
+    {
+        return $this->hasMany(Score::class, Score::GAME_ID, self::ID);
     }
 }

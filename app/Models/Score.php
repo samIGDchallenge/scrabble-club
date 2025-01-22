@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Score extends Model
 {
     public const ID = 'id';
+    public const SCORE = 'score';
     public const GAME_ID = 'gameId';
     public const MEMBER_ID = 'memberId';
 
@@ -22,6 +23,14 @@ class Score extends Model
     public function getId(): string
     {
         return $this->{self::ID};
+    }
+
+    /**
+     * @return int
+     */
+    public function getScore(): int
+    {
+        return $this->{self::SCORE};
     }
 
     /**
