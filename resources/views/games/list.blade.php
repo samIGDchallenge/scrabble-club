@@ -45,14 +45,12 @@
                         <td class="p-2 pb-4 text-left align-top">
                             <table>
                                 <tbody>
-                                @if(count($game->getScores()))
                                 @foreach($game->getScores() as $score)
                                     <tr>
                                         <th class="align-top pr-2">{{ $score->getMember()->getName() }}:</th>
                                         <td class="align-top">{{ $score->getScore() }}</td>
                                     </tr>
                                 @endforeach
-                                @endif
                                 </tbody>
                             </table>
                         </td>

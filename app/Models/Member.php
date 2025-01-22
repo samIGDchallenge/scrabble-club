@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
 class Member extends Model
@@ -152,9 +153,17 @@ class Member extends Model
     /**
      * @return HasMany<Score>
      */
-    public function allScores(): HasMany
+    public function scores(): HasMany
     {
         return $this->hasMany(Score::class, Score::MEMBER_ID, self::ID);
+    }
+
+    /**
+     * @return Collection<Game>
+     */
+    public function getScores(): Collection
+    {
+        return $this->scores()->orderBy(Game::ID,'desc')->get();
     }
 
     /**

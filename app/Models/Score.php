@@ -43,6 +43,14 @@ class Score extends Model
     }
 
     /**
+     * @return Game
+     */
+    public function getGame(): Game
+    {
+        return $this->game()->get()->first();
+    }
+
+    /**
      * @return BelongsTo<Member>
      */
     public function member(): BelongsTo
@@ -51,10 +59,10 @@ class Score extends Model
     }
 
     /**
-     * @return Member|null
+     * @return Member
      */
-    public function getMember(): ?Member
+    public function getMember(): Member
     {
-        return $this->member()->get()->first() ?? null;
+        return $this->member()->get()->first();
     }
 }

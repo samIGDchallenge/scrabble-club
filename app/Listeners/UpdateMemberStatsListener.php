@@ -26,7 +26,7 @@ class UpdateMemberStatsListener implements ShouldQueue
             }
 
             // Update average score for member
-            $newAvgScore = $member->allScores()->avg('score');
+            $newAvgScore = round($member->scores()->avg('score'));
             $member->setAvgScore($newAvgScore);
 
             // Update recent form for member

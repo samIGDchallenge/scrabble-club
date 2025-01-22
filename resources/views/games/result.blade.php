@@ -7,7 +7,7 @@
 @section('content')
     <div class="rounded-2xl bg-white p-4 mt-4">
         <div class="flex pt-3 pb-3">
-            <h3 class="font-bold text-lg pr-3">Scrabble Game Result</h3>
+            <h3 class="font-bold text-lg pr-3">Game Result</h3>
         </div>
         <table>
             <tbody>

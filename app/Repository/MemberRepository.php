@@ -56,7 +56,8 @@ class MemberRepository
             Member::NAME => $name,
             Member::EMAIL => $email,
             Member::PHONE => $phone,
-            Member::JOIN_DATE => $joinDate
+            Member::JOIN_DATE => $joinDate,
+            Member::HIGH_SCORE_ID => 0
         ]);
     }
 

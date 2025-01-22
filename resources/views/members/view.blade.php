@@ -64,7 +64,7 @@
         </div>
         <div class="rounded-2xl bg-white p-4 mt-4">
             <h5 class="font-bold text-lg">Recent Form</h5>
-            <table class="table-fixed w-full">
+            <table class="w-full">
                 <thead>
                 <tr>
                     <th class="text-left p-2">
@@ -79,24 +79,27 @@
                 </tr>
                 </thead>
                 <tbody>
-{{--                @if (count($member->getRecentGames()) > 0)--}}
-{{--                    @foreach($member->getRecentGames() as $game)--}}
-{{--                    <tr>--}}
-{{--                        <td class="text-left p-2">--}}
-{{--                        </td>--}}
-{{--                        <td lass="text-right p-2">--}}
-{{--                        </td>--}}
-{{--                        <td class="text-left p-2">--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
-{{--                    @endforeach--}}
-{{--                @else--}}
-{{--                    <tr>--}}
-{{--                        <td colspan="3">--}}
-{{--                            No games played--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
-{{--                @endif--}}
+                @if (count($member->getScores()) > 0)
+                    @foreach($member->getScores() as $score)
+                    <tr>
+                        <td class="text-left p-2">
+                            {{ $score->getGame()->getWinner()->getId() === $member->getId() ? 'W' : 'L' }}
+                        </td>
+                        <td class="text-right p-2">
+                            {{ $score->getScore() }}
+                        </td>
+                        <td class="text-left p-2">
+                            {{ $score->getGame()->getTime() }}
+                        </td>
+                    </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td colspan="3">
+                            No games played
+                        </td>
+                    </tr>
+                @endif
                 </tbody>
             </table>
         </div>
