@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Enum\Date;
+use DateTime;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SaveMemberRequest extends FormRequest
 {
@@ -10,6 +13,7 @@ class SaveMemberRequest extends FormRequest
     public const EMAIL = 'email';
     public const PHONE = 'phone';
     public const JOIN_DATE = 'joinDate';
+    public const MEMBER_ID = 'memberId';
 
     public function authorize(): bool
     {
@@ -19,10 +23,20 @@ class SaveMemberRequest extends FormRequest
     public function rules(): array
     {
         return [
-            self::NAME => 'required|string|min:5|max:100',
-            self::EMAIL => 'required|string|min:5|max:100',
-            self::PHONE => 'required|string|min:5|max:100',
-            self::JOIN_DATE => 'required|string|min:5|max:100'
+            self::NAME => 'required|string|min:3|max:30',
+            self::EMAIL => [
+                'required',
+                'email',
+                Rule::unique('members','email')->ignore($this->getMemberId(),'id')
+            ],
+            self::PHONE => [
+                'required',
+                'string',
+                'min:10',
+                'max:15',
+                Rule::unique('members','phone')->ignore($this->getMemberId(),'id')
+            ],
+            self::JOIN_DATE => 'required|string|min:5|max:10'
         ];
     }
 
@@ -41,8 +55,14 @@ class SaveMemberRequest extends FormRequest
         return $this->get(self::PHONE);
     }
 
-    public function getJoinDate(): string
+    public function getJoinDate(): DateTime
     {
-        return $this->get(self::JOIN_DATE);
+        $joinDateString = $this->get(self::JOIN_DATE);
+        return DateTime::createFromFormat(Date::DATE,$joinDateString);
+    }
+
+    public function getMemberId(): ?int
+    {
+        return $this->get(self::MEMBER_ID) ?? null;
     }
 }

@@ -57,14 +57,14 @@ class MemberController
         ]);
     }
 
-    public function update(SaveMemberRequest $request, string $memberId): RedirectResponse
+    public function update(SaveMemberRequest $request): RedirectResponse
     {
-        $member = $this->repository->getMember($memberId);
+        $member = $this->repository->getMember($request->getMemberId());
 
-        $member->setName($request->get(SaveMemberRequest::NAME))
-            ->setEmail($request->get(SaveMemberRequest::EMAIL))
-            ->setPhone($request->get(SaveMemberRequest::PHONE))
-            ->setJoinDate($request->get(SaveMemberRequest::JOIN_DATE));
+        $member->setName($request->getName())
+            ->setEmail($request->getEmail())
+            ->setPhone($request->getPhone())
+            ->setJoinDate($request->getJoinDate());
 
         $member->save();
 

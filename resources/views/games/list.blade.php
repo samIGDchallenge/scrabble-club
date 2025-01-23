@@ -25,7 +25,7 @@
                 <thead>
                 <tr>
                     <th class="p-2 text-right align-top">Game</th>
-                    <th class="p-2 text-left align-top">Time</th>
+                    <th class="p-2 text-left align-top">Played At</th>
                     <th class="p-2 text-left align-top">Winner</th>
                     <th class="p-2 text-left align-top">Scores</th>
                 </tr>
@@ -35,19 +35,27 @@
                     @foreach($games as $game)
                     <tr>
                         <td class="p-2 pb-4 text-right align-top">{{ $game->getId() }}</td>
-                        <td class="p-2 pb-4 text-left align-top">{{ $game->getTime() }}</td>
+                        <td class="p-2 pb-4 text-left align-top">{{ $game->getFormattedPlayedAt() }}</td>
                         <td class="p-2 pb-4 text-left align-top">
-                            {{ $game->getWinner()->getName() }}
-                            <a href="{{ route('members.view', ['memberId' => $game->getWinner()->getId()]) }}"
-                               class="rounded bg-blue-200 pl-2 pr-2 pt-1 pb-1"
-                            >View</a>
+                            <div class="flex">
+                                <div class="w-full">
+                                    {{ $game->getWinner()?->getName() ?? '[deleted]' }}
+                                </div>
+                                @if ($game->getWinner())
+                                    <div class="ml-1">
+                                        <a href="{{ route('members.view', ['memberId' => $game->getWinner()->getId()]) }}"
+                                           class="rounded bg-blue-200 pl-2 pr-2 pt-1 pb-1"
+                                        >View</a>
+                                    </div>
+                                @endif
+                            </div>
                         </td>
                         <td class="p-2 pb-4 text-left align-top">
                             <table>
                                 <tbody>
                                 @foreach($game->getScores() as $score)
                                     <tr>
-                                        <th class="align-top pr-2">{{ $score->getMember()->getName() }}:</th>
+                                        <th class="align-top pr-2">{{ $score->getMember()?->getName() ?? '[deleted]' }}:</th>
                                         <td class="align-top">{{ $score->getScore() }}</td>
                                     </tr>
                                 @endforeach

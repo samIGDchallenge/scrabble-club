@@ -42,7 +42,7 @@
                 </tr>
                 <tr>
                     <td class="font-bold p-2">Join Date</td>
-                    <td>{{ $member->getJoinDate() }}</td>
+                    <td>{{ $member->getFormattedJoinDate() }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -53,18 +53,29 @@
                 <tbody>
                 <tr>
                     <td class="font-bold p-2">Average Score</td>
-                    <td class="p-2">{{ $member->getAvgScore() }}</td>
+                    @if ($member->getAvgScore() > 0)
+                        <td class="p-2">{{ $member->getAvgScore() }}</td>
+                    @else
+                        <td class="p-2">N/A</td>
+                    @endif
                 </tr>
                 <tr>
                     <td class="font-bold p-2">Highest Score</td>
-                    <td class="p-2">{{ $member->getHighScore() }}</td>
+                    @if ($member->getHighScoreValue() > 0)
+                        <td class="p-2">
+                            {{ $member->getHighScoreValue() }}
+                            ({{ $member->getHighScore()->getGame()->getFormattedPlayedAt(true) }})
+                        </td>
+                    @else
+                        <td class="p-2">N/A</td>
+                    @endif
                 </tr>
                 </tbody>
             </table>
         </div>
         <div class="rounded-2xl bg-white p-4 mt-4">
             <h5 class="font-bold text-lg">Recent Form</h5>
-            <table class="w-full">
+            <table>
                 <thead>
                 <tr>
                     <th class="text-left p-2">
@@ -74,7 +85,7 @@
                         Score
                     </th>
                     <th class="text-left p-2">
-                        Time of Game
+                        Played At
                     </th>
                 </tr>
                 </thead>
@@ -83,13 +94,13 @@
                     @foreach($member->getScores() as $score)
                     <tr>
                         <td class="text-left p-2">
-                            {{ $score->getGame()->getWinner()->getId() === $member->getId() ? 'W' : 'L' }}
+                            {{ $score->getGame()->getWinner()?->getId() === $member->getId() ? 'Won' : 'Lost' }}
                         </td>
                         <td class="text-right p-2">
                             {{ $score->getScore() }}
                         </td>
                         <td class="text-left p-2">
-                            {{ $score->getGame()->getTime() }}
+                            {{ $score->getGame()->getFormattedPlayedAt(true) }}
                         </td>
                     </tr>
                     @endforeach

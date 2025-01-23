@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->string('joinDate');
+            $table->date('joinDate');
             $table->integer('avgScore')->default(0);
             $table->string('recentForm',5)->default('-----');
             $table->integer('highScore')->default(0);

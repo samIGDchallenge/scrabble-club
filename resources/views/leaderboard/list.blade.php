@@ -23,10 +23,16 @@
                 <tr>
                     <td class="p-2 text-left">{{ $position + 1 }}</td>
                     <td class="p-2 text-left">
-                        {{ $member->getName() }}
-                        <a href="{{ route('members.view', ['memberId' => $member->getId()]) }}"
-                           class="rounded bg-blue-200 pl-2 pr-2 pt-1 pb-1"
-                        >View</a>
+                        <div class="flex">
+                            <div class="w-full">
+                                {{ $member->getName() }}
+                            </div>
+                            <div class="ml-1">
+                                <a href="{{ route('members.view', ['memberId' => $member->getId()]) }}"
+                                   class="rounded bg-blue-200 pl-2 pr-2 pt-1 pb-1"
+                                >View</a>
+                            </div>
+                        </div>
                     </td>
                     <td class="p-2 text-right">{{ $member->getAvgScore() }}</td>
                 </tr>

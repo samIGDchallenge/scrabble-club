@@ -17,11 +17,11 @@
             </tr>
             <tr>
                 <td class="font-bold align-top p-2">Time</td>
-                <td class="p-2">{{ $game->getTime() }}</td>
+                <td class="p-2">{{ $game->getFormattedPlayedAt(true) }}</td>
             </tr>
             <tr>
                 <td class="font-bold align-top p-2">Winner</td>
-                <td class="p-2">{{ $game->getWinner()->getName() }}</td>
+                <td class="p-2">{{ $game->getWinner()?->getName() ?? '[deleted]' }}</td>
             </tr>
             <tr>
                 <td class="font-bold align-top p-2">Scores</td>

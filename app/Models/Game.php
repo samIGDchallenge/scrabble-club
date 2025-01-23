@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use App\Enum\Date;
+use DateTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -25,9 +26,22 @@ class Game extends Model
         return $this->{self::ID};
     }
 
-    public function getTime(): Carbon
+    /**
+     * @return DateTime
+     */
+    public function getPlayedAt(): DateTime
     {
         return $this->{self::CREATED_AT};
+    }
+
+    /**
+     * @return string
+     */
+    public function getFormattedPlayedAt(bool $showFullDate = false): string
+    {
+        $playedAt = $this->getPlayedAt();
+        $dateFormat = $showFullDate ? Date::HUMAN_TIME_FULL : Date::HUMAN_TIME_SHORT;
+        return $playedAt->format($dateFormat);
     }
 
     /**
@@ -39,11 +53,11 @@ class Game extends Model
     }
 
     /**
-     * @return Member
+     * @return Member|null
      */
-    public function getWinner(): Member
+    public function getWinner(): ?Member
     {
-        return $this->winner()->get()->first();
+        return $this->winner()->get()->first() ?? null;
     }
 
     /**

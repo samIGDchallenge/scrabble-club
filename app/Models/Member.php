@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enum\Date;
+use DateTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -32,6 +34,10 @@ class Member extends Model
         self::RECENT_FORM,
         self::HIGH_SCORE,
         self::HIGH_SCORE_ID
+    ];
+
+    protected $casts = [
+        self::JOIN_DATE => 'date'
     ];
 
     /**
@@ -97,18 +103,36 @@ class Member extends Model
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
-    public function getJoinDate(): string
+    public function getJoinDate(): DateTime
     {
         return $this->{self::JOIN_DATE};
     }
 
     /**
-     * @param string $joinDate
+     * @return string
+     */
+    public function getJoinDateString(): string
+    {
+        $joinDate = $this->getJoinDate();
+        return $joinDate->format(Date::DATE);
+    }
+
+    /**
+     * @return string
+     */
+    public function getFormattedJoinDate(): string
+    {
+        $joinDate = $this->getJoinDate();
+        return $joinDate->format(Date::HUMAN);
+    }
+
+    /**
+     * @param DateTime $joinDate
      * @return Member
      */
-    public function setJoinDate(string $joinDate): Member
+    public function setJoinDate(DateTime $joinDate): Member
     {
         $this->{self::JOIN_DATE} = $joinDate;
         return $this;
@@ -167,9 +191,9 @@ class Member extends Model
     }
 
     /**
-     * @return HasOne<Score>|null
+     * @return HasOne<Score>
      */
-    public function highScore(): ?HasOne
+    public function highScore(): HasOne
     {
         return $this->hasOne(Score::class, Score::ID, self::HIGH_SCORE_ID);
     }
@@ -177,9 +201,17 @@ class Member extends Model
     /**
      * @return int
      */
-    public function getHighScore(): int
+    public function getHighScoreValue(): int
     {
-        return $this->{self::HIGH_SCORE};
+        return $this->{self::HIGH_SCORE} ?? 0;
+    }
+
+    /**
+     * @return Score
+     */
+    public function getHighScore(): Score
+    {
+        return $this->highScore()->get()->first();
     }
 
     /**

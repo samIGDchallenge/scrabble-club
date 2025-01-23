@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enum\Date;
 use App\Models\Member;
 use Illuminate\Database\Seeder;
 
@@ -17,9 +18,9 @@ class MemberTableSeeder extends Seeder
             'Fred Bloggs',
             'scrabble.king123@gmail.com',
             '07123456789',
-            '2025-01-21 13:45:23',
+            \DateTime::createFromFormat(Date::DATE,'2024-05-11'),
             270,
-            'LLL',
+            '--LLL',
             341,
             8
         );
@@ -27,27 +28,29 @@ class MemberTableSeeder extends Seeder
             'Jane Doe',
             'thehumandictionary@yahoo.co.uk',
             '01345123456',
-            '2025-01-11 11:23:12',
+            \DateTime::createFromFormat(Date::DATE,'2024-07-21'),
             319,
-            'LLWW',
+            '-LLWW',
             442,
             9
         );
-        $this->addMember('John Smith',
+        $this->addMember(
+            'John Smith',
             'wordsmith_john@hotmail.com',
             '07999555666',
-            '2024-12-23 15:42:23',
+            \DateTime::createFromFormat(Date::DATE,'2024-12-23'),
             394,
-            'WL',
+            '---WL',
             555,
             6
         );
-        $this->addMember('Joe Public',
+        $this->addMember(
+            'Joe Public',
             'spell.caster@aol.com',
             '07789112233',
-            '2024-12-23 15:42:23',
+            \DateTime::createFromFormat(Date::DATE,'2024-12-24'),
             283,
-            'WLLL',
+            '-WLLL',
             455,
             3
         );
@@ -57,7 +60,7 @@ class MemberTableSeeder extends Seeder
         string $name,
         string $email,
         string $phone,
-        string $joinDate,
+        \DateTime $joinDate,
         int $avgScore,
         string $recentForm,
         int $highScore,

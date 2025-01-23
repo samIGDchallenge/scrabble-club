@@ -32,7 +32,7 @@
                     <td class="p-2 text-left">{{ $member->getName() }}</td>
                     <td class="p-2 text-left">{{ $member->getEmail() }}</td>
                     <td class="p-2 text-left">{{ $member->getPhone() }}</td>
-                    <td class="p-2 text-left">{{ $member->getJoinDate() }}</td>
+                    <td class="p-2 text-left">{{ $member->getFormattedJoinDate() }}</td>
                     <td class="p-2 text-right">{{ $member->getAvgScore() }}</td>
                     <td class="p-2 text-left">{{ $member->getRecentForm() }}</td>
                     <td class="p-2 text-middle">

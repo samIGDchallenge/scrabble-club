@@ -4,10 +4,11 @@
             {{ $label }}
         </label>
         <input
-            type="text"
+            type="date"
             class="w-9/12 border border-gray-500 rounded"
             name="{{ $name }}"
             value="{{ old($name) ?? ($value ?? '') }}"
+            min="2000-01-01"
             id="{{ strtolower($name) }}"
         >
     </div>

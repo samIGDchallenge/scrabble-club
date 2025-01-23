@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Models\Member;
+use DateTime;
 use Illuminate\Support\Collection;
 use Illuminate\Support\LazyCollection;
 
@@ -50,7 +51,7 @@ class MemberRepository
         return $this->model->newModelQuery()->find($memberId);
     }
 
-    public function create(string $name, string $email, string $phone, string $joinDate): Member
+    public function create(string $name, string $email, string $phone, DateTime $joinDate): Member
     {
         return $this->model->newModelQuery()->create([
             Member::NAME => $name,

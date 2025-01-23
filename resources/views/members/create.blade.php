@@ -29,7 +29,7 @@
                         'label' => 'Phone',
                         'name' => 'phone'
                     ])
-                    @include('components.input', [
+                    @include('components.dateInput', [
                         'label' => 'Join Date',
                         'name' => 'joinDate'
                     ])

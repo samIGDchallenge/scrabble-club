@@ -21,7 +21,7 @@ class UpdateMemberStatsListener implements ShouldQueue
             $member = $this->repository->getMember($score->getMember()->getId());
 
             // Update high score for member
-            if ($score->getScore() > $member->getHighScore()) {
+            if ($score->getScore() > $member->getHighScoreValue()) {
                 $member->setHighScore($score);
             }
 

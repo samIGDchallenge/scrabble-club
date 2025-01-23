@@ -59,10 +59,10 @@ class Score extends Model
     }
 
     /**
-     * @return Member
+     * @return Member|null
      */
-    public function getMember(): Member
+    public function getMember(): ?Member
     {
-        return $this->member()->get()->first();
+        return $this->member()->get()->first() ?? null;
     }
 }

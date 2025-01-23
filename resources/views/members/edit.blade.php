@@ -14,11 +14,13 @@
             <form
                 class="w-full"
                 method="POST"
-                action="{{ route('members.update', ['memberId' => $member->getId()]) }}"
+                action="{{ route('members.update') }}"
                 enctype="multipart/form-data"
             >
                 @csrf
+                @method('PATCH')
                 <div class="w-full">
+                    <input type="hidden" id="memberId" name="memberId" value="{{ $member->getId() }}">
                     @include('components.input', [
                         'label' => 'Name',
                         'name' => 'name',
@@ -34,10 +36,10 @@
                         'name' => 'phone',
                         'value' => $member->getPhone()
                     ])
-                    @include('components.input', [
+                    @include('components.dateInput', [
                         'label' => 'Join Date',
                         'name' => 'joinDate',
-                        'value' => $member->getJoinDate()
+                        'value' => $member->getJoinDateString()
                     ])
                 </div>
                 <button type="submit" class="bg-green-500 text-white rounded pl-2 pr-2 pt-1 pb-1">Submit</button>
