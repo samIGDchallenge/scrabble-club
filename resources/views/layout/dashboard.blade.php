@@ -1,5 +1,5 @@
 <div>
-    <div class="rounded-2xl bg-white p-4 mt-4">
+    <div class="rounded-2xl bg-amber-100 p-4 mt-4">
         <h1 class="font-bold text-2xl mt-2 mb-2">Welcome to Scrabble Club</h1>
         <p class="mb-4">Use the buttons on the left to navigate:</p>
         <dl>

@@ -5,7 +5,7 @@
         </label>
         <input
             type="date"
-            class="w-9/12 border border-gray-500 rounded"
+            class="w-9/12 border border-gray-500 rounded p-1"
             name="{{ $name }}"
             value="{{ old($name) ?? ($value ?? '') }}"
             min="2000-01-01"

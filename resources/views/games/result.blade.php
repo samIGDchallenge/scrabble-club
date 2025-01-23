@@ -5,7 +5,7 @@
 @extends('layout.wrapper')
 
 @section('content')
-    <div class="rounded-2xl bg-white p-4 mt-4">
+    <div class="rounded-2xl bg-amber-100 p-4 mt-4">
         <div class="flex pt-3 pb-3">
             <h3 class="font-bold text-lg pr-3">Game Result</h3>
         </div>

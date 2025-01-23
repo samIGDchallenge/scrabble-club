@@ -6,12 +6,12 @@
     <title>Boiler Central</title>
     @vite('resources/css/app.css')
 </head>
-<body class="antialiased overflow-x-hidden w-full h-full bg-gray-200">
+<body class="antialiased overflow-x-hidden w-full h-full bg-green-800">
 <div class="flex m-5">
     <div class="w-2/12">
         @include('layout.nav')
     </div>
-    <div class="w-10/12 p-5 rounded-2xl bg-gray-200">
+    <div class="w-10/12 p-5 rounded-2xl bg-green-800">
         @yield('content')
     </div>
 </div>

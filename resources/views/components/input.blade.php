@@ -5,7 +5,7 @@
         </label>
         <input
             type="text"
-            class="w-9/12 border border-gray-500 rounded"
+            class="w-9/12 border border-gray-500 rounded p-1"
             name="{{ $name }}"
             value="{{ old($name) ?? ($value ?? '') }}"
             id="{{ strtolower($name) }}"
