@@ -4,16 +4,15 @@ namespace App\Models;
 
 use App\Enum\Date;
 use DateTime;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
-use Laravel\Sanctum\HasApiTokens;
 
 class Member extends Model
 {
-    use HasApiTokens, Notifiable;
+    use HasFactory;
 
     public const ID = 'id';
     public const NAME = 'name';
@@ -207,11 +206,11 @@ class Member extends Model
     }
 
     /**
-     * @return Score
+     * @return Score|null
      */
-    public function getHighScore(): Score
+    public function getHighScore(): ?Score
     {
-        return $this->highScore()->get()->first();
+        return $this->highScore()->get()->first() ?? null;
     }
 
     /**

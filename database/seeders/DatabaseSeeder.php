@@ -2,11 +2,17 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Member;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Collection;
+use App\Services\GameServiceInterface;
 
 class DatabaseSeeder extends Seeder
 {
+    public function __construct(
+        private GameServiceInterface $gameService
+    ) {}
+
     /**
      * Seed the application's database.
      *
@@ -14,14 +20,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(MemberTableSeeder::class);
-        $this->call(ScoreTableSeeder::class);
-        $this->call(GameTableSeeder::class);
-        // \App\Models\User::factory(10)->create();
+        /**
+         * @var $members Collection<Member>
+         */
+        Member::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        for ($i = 0; $i < 10; $i++) {
+            $this->gameService->playGame();
+        }
     }
 }

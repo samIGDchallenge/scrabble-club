@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Boiler Central</title>
+    <title>Scrabble Club</title>
     @vite('resources/css/app.css')
 </head>
 <body class="antialiased overflow-x-hidden w-full h-full bg-green-800">
