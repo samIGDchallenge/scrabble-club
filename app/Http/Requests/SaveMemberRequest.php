@@ -31,12 +31,17 @@ class SaveMemberRequest extends FormRequest
             ],
             self::PHONE => [
                 'required',
-                'string',
-                'min:10',
-                'max:15',
+                'phone:gb',
                 Rule::unique('members','phone')->ignore($this->getMemberId(),'id')
             ],
             self::JOIN_DATE => 'required|string|min:5|max:10'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            self::PHONE . '.phone' => 'The phone number must be a valid UK phone number.',
         ];
     }
 
