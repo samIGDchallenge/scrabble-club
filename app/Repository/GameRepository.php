@@ -23,4 +23,11 @@ class GameRepository
     {
         return $this->model->newModelQuery()->find($gameId);
     }
+
+    public function create(): Game
+    {
+        return $this->model->newModelQuery()->create([
+            Game::WINNER_ID => 0
+        ]);
+    }
 }

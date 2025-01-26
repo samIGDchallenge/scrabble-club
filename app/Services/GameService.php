@@ -4,8 +4,11 @@ namespace App\Services;
 
 use App\Events\GameFinishedEvent;
 use App\Models\Game;
+use App\Models\Member;
 use App\Models\Score;
+use App\Repository\GameRepository;
 use App\Repository\MemberRepository;
+use App\Repository\ScoreRepository;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Collection;
 
@@ -13,35 +16,27 @@ class GameService implements GameServiceInterface
 {
     public function __construct(
         private Dispatcher $dispatcher,
-        private MemberRepository $repository
+        private MemberRepository $memberRepository,
+        private GameRepository $gameRepository,
+        private ScoreRepository $scoreRepository
     ) {}
 
     public function playGame(): Game
     {
         // Games must have between 2–4 players
         $lowerLimit = 2;
-        $upperLimit = min(4,$this->repository->getNumberOfMembers());
+        $upperLimit = min(4,$this->memberRepository->getNumberOfMembers());
         $numberOfPlayers = rand($lowerLimit,$upperLimit);
 
-        $players = $this->repository->getRandomMembers($numberOfPlayers);
+        $players = $this->memberRepository->getRandomMembers($numberOfPlayers);
 
-        $game = Game::create([
-            Game::WINNER_ID => 0
-        ]);
-        $scores = new Collection();
+        $game = $this->gameRepository->create();
 
-        foreach ($players as $player) {
-            // Generate random score between 100 and 500 for each player
-            $score = rand(100,500);
+        $scores = $this->scoreRepository->generateGameScores(
+            $players,
+            $game->getId()
+        );
 
-            $scores->push(
-                Score::create([
-                    Score::SCORE => $score,
-                    Score::GAME_ID => $game->getId(),
-                    Score::MEMBER_ID => $player->getId(),
-                ])
-            );
-        }
         $winner = $scores->sortByDesc(Score::SCORE)->first();
         $game->setWinner($winner->getMember()->getId());
         $game->save();
