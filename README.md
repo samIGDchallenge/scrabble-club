@@ -1,17 +1,57 @@
-## Welcome to Scrabble Club
+# Setup
 
-Use the buttons on the left to navigate:
+## Clone repository
 
-### Club Members
+Clone repository to your local machine with:
+```
+git clone git@github.com:samIGDchallenge/scrabble-club.git
+cd scrabble-club
+```
 
-View, create, edit and delete club members.
+## Install dependencies
 
-### Games
+Install the project's dependencies using the following:
+```
+composer install
+```
+Then install Node dependencies with
+```
+npm install
+```
+then,
+```
+npm run build
+```
 
-See results from previous games, or use the 'play game' button to simulate a new game. It will display the winner of the
-game, and the scores of each participant. It then fires an event which updates the average score, high score, and recent
-scores for playing participants — just find the member in the Club Members tab, and you'll see it's updated.
+## Set up environment
 
-### Leaderboard
+Copy .env.example file to .env and update the DB_ settings to match your local database settings.
+Use the following command to generate the app key:
+```
+php artisan key:generate
+```
 
-See the top members ordered by their average score. If there are more than 10 members, it will show the top 10.
+## Perform migrations and seed the database
+
+Use the following to migrate the database
+```
+php artisan migrate
+```
+Then do this to seed the database with dummy data
+```
+php artisan db:seed
+```
+
+## Start application
+
+Use the following to start the development server, so you can run the app on your machine
+```
+php artisan serve
+```
+
+## Run tests
+
+Use the following to run tests
+```
+php artisan test
+```
